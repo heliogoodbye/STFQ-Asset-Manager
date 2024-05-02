@@ -1,5 +1,7 @@
 # STFQ Asset Manager
 
+![STFQ Asset Manager](https://github.com/heliogoodbye/STFQ-Asset-Manager/assets/105381685/7e3f8c2d-647e-4c4b-9955-905fdc0eca89)
+
 The "STFQ Asset Manager" plugin is designed to help WordPress users efficiently manage and distribute digital assets such as AI, EPS, and PDF documents. Let's break down its features and functionalities:
 
 1. **Custom Post Type Registration**: The plugin registers a custom post type called "STFQ Assets" through the `stfq_register_post_type` function. This custom post type allows users to add digital assets with features like title, editor, and thumbnail support.
