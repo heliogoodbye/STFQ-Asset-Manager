@@ -12,9 +12,26 @@ License URI: https://www.gnu.org/licenses/old-licenses/gpl-3.0.html
 
 // Register custom post type
 function stfq_register_post_type() {
-    $args = array(
+    $labels = array(
+        'name'               => _x( 'Assets', 'post type general name', 'stfq-asset-manager' ),
+        'singular_name'      => _x( 'Asset', 'post type singular name', 'stfq-asset-manager' ),
+        'menu_name'          => _x( 'STFQ Assets', 'admin menu', 'stfq-asset-manager' ),
+        'name_admin_bar'     => _x( 'Asset', 'add new on admin bar', 'stfq-asset-manager' ),
+        'add_new'            => _x( 'Add New', 'asset', 'stfq-asset-manager' ),
+        'add_new_item'       => __( 'Add New Asset', 'stfq-asset-manager' ),
+        'new_item'           => __( 'New Asset', 'stfq-asset-manager' ),
+        'edit_item'          => __( 'Edit Asset', 'stfq-asset-manager' ),
+        'view_item'          => __( 'View Asset', 'stfq-asset-manager' ),
+        'all_items'          => __( 'All Assets', 'stfq-asset-manager' ),
+        'search_items'       => __( 'Search Assets', 'stfq-asset-manager' ),
+        'parent_item_colon'  => __( 'Parent Assets:', 'stfq-asset-manager' ),
+        'not_found'          => __( 'No assets found.', 'stfq-asset-manager' ),
+        'not_found_in_trash' => __( 'No assets found in Trash.', 'stfq-asset-manager' )
+    );
+	
+	$args = array(
         'public' => true,
-        'label'  => 'STFQ Assets',
+       	'labels' => $labels,
         'supports' => array( 'title', 'editor', 'thumbnail'),
         'taxonomies' => array( 'asset_tags' ),
         'menu_icon' => 'dashicons-images-alt2',
