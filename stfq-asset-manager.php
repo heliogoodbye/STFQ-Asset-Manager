@@ -3,7 +3,7 @@
 Plugin Name: STFQ Asset Manager
 Description: Manage digital assets like AI, EPS, and PDF documents.
 Plugin URI: https://strangefrequency.com/wp-plugins/stfq-asset-manager/
-Version: 1.0
+Version: 1.5
 Author: Strangefrequency LLC
 Author URI: https://strangefrequency.com/
 License: GPL-3.0-or-later
