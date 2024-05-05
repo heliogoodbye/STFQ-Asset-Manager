@@ -74,6 +74,16 @@ function stfq_add_meta_boxes() {
 }
 add_action( 'add_meta_boxes', 'stfq_add_meta_boxes' );
 
+// Function to display file type meta box
+function stfq_file_type_meta_box( $post ) {
+    // Retrieve existing value of file type
+    $file_type = get_post_meta( $post->ID, 'file_type', true );
+    ?>
+    <label for="stfq_file_type">File Type:</label><br>
+    <input type="text" id="stfq_file_type" name="stfq_file_type" value="<?php echo esc_attr( $file_type ); ?>" style="width: 100%;" class="regular-text">
+    <?php
+}
+
 // Function to display download URL meta box
 function stfq_download_url_meta_box( $post ) {
     // Retrieve existing value of download URL
@@ -198,6 +208,6 @@ add_shortcode( 'display_assets', 'stfq_display_assets_shortcode' );
 // Enqueue scripts and styles for the front end
 function stfq_enqueue_scripts_styles() {
     // Enqueue CSS stylesheet
-    wp_enqueue_style( 'stfq-asset-manager-styles', plugins_url( 'style.css', __FILE__ ), array(),);
+    wp_enqueue_style( 'stfq-asset-manager-styles', plugins_url( 'stfq-asset-manager-styles.css', __FILE__ ), array(),);
 }
 add_action( 'wp_enqueue_scripts', 'stfq_enqueue_scripts_styles' );
