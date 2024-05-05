@@ -74,13 +74,21 @@ function stfq_add_meta_boxes() {
 }
 add_action( 'add_meta_boxes', 'stfq_add_meta_boxes' );
 
-// Function to display file type meta box
+// Function to display file type meta box with dropdown menu
 function stfq_file_type_meta_box( $post ) {
     // Retrieve existing value of file type
     $file_type = get_post_meta( $post->ID, 'file_type', true );
     ?>
     <label for="stfq_file_type">File Type:</label><br>
-    <input type="text" id="stfq_file_type" name="stfq_file_type" value="<?php echo esc_attr( $file_type ); ?>" style="width: 100%;" class="regular-text">
+    <select id="stfq_file_type" name="stfq_file_type" style="width: 100%;">
+        <option value="AI" <?php selected( $file_type, 'AI' ); ?>>AI</option>
+        <option value="BMP" <?php selected( $file_type, 'BMP' ); ?>>BMP</option>
+        <option value="EPS" <?php selected( $file_type, 'EPS' ); ?>>EPS</option>
+        <option value="GIF" <?php selected( $file_type, 'GIF' ); ?>>GIF</option>
+        <option value="JPG" <?php selected( $file_type, 'JPG' ); ?>>JPG</option>
+        <option value="PDF" <?php selected( $file_type, 'PDF' ); ?>>PDF</option>
+        <option value="PNG" <?php selected( $file_type, 'PNG' ); ?>>PNG</option>
+    </select>
     <?php
 }
 
