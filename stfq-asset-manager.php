@@ -12,26 +12,9 @@ License URI: https://www.gnu.org/licenses/old-licenses/gpl-3.0.html
 
 // Register custom post type
 function stfq_register_post_type() {
-    $labels = array(
-        'name'               => _x( 'Assets', 'post type general name', 'stfq-asset-manager' ),
-        'singular_name'      => _x( 'Asset', 'post type singular name', 'stfq-asset-manager' ),
-        'menu_name'          => _x( 'Assets', 'admin menu', 'stfq-asset-manager' ),
-        'name_admin_bar'     => _x( 'Asset', 'add new on admin bar', 'stfq-asset-manager' ),
-        'add_new'            => _x( 'Add New', 'game', 'stfq-asset-manager' ),
-        'add_new_item'       => __( 'Add New Asset', 'stfq-asset-manager' ),
-        'new_item'           => __( 'New Asset', 'stfq-asset-manager' ),
-        'edit_item'          => __( 'Edit Asset', 'stfq-asset-manager' ),
-        'view_item'          => __( 'View Asset', 'stfq-asset-manager' ),
-        'all_items'          => __( 'All Assets', 'stfq-asset-manager' ),
-        'search_items'       => __( 'Search Assets', 'stfq-asset-manager' ),
-        'parent_item_colon'  => __( 'Parent Assets:', 'stfq-asset-manager' ),
-        'not_found'          => __( 'No assets found.', 'stfq-asset-manager' ),
-        'not_found_in_trash' => __( 'No assets found in Trash.', 'stfq-asset-manager' )
-    );
-
     $args = array(
         'public' => true,
-        'labels'  => $labels,
+        'label'  => 'STFQ Assets',
         'supports' => array( 'title', 'editor', 'thumbnail'),
         'taxonomies' => array( 'asset_tags' ),
         'menu_icon' => 'dashicons-images-alt2',
@@ -97,7 +80,7 @@ function stfq_download_url_meta_box( $post ) {
     $download_url = get_post_meta( $post->ID, 'download_url', true );
     ?>
     <label for="stfq_download_url">Download URL:</label><br>
-    <input type="text" id="stfq_download_url" name="stfq_download_url" value="<?php echo esc_attr( $download_url ); ?>" style="width: 100%;">
+    <input type="text" id="stfq_download_url" name="stfq_download_url" value="<?php echo esc_attr( $download_url ); ?>" style="width: 100%;" class="regular-text">
     <?php
 }
 
@@ -128,29 +111,6 @@ function stfq_save_custom_fields( $post_id ) {
     }
 }
 add_action( 'save_post', 'stfq_save_custom_fields' );
-
-// Function to display asset tags meta box
-function stfq_asset_tags_meta_box( $post ) {
-    // Code to display and handle asset tags
-}
-
-// Function to display file type meta box
-function stfq_file_type_meta_box( $post ) {
-    // Retrieve existing value of file type
-    $file_type = get_post_meta( $post->ID, 'file_type', true );
-    ?>
-    <label for="stfq_file_type">File Type:</label><br>
-    <select id="stfq_file_type" name="stfq_file_type">
-        <option value="AI" <?php selected( $file_type, 'AI' ); ?>>AI</option>
-        <option value="EPS" <?php selected( $file_type, 'EPS' ); ?>>EPS</option>
-		<option value="JPG" <?php selected( $file_type, 'JPG' ); ?>>JPG</option>
-        <option value="MP3" <?php selected( $file_type, 'MP3' ); ?>>PNG</option>
-		<option value="PDF" <?php selected( $file_type, 'PDF' ); ?>>PDF</option>
-        <option value="PNG" <?php selected( $file_type, 'PNG' ); ?>>PNG</option>
-		<option value="WAV" <?php selected( $file_type, 'WAV' ); ?>>PNG</option>
-    </select>
-    <?php
-}
 
 // Shortcode to display digital assets
 function stfq_display_assets_shortcode( $atts ) {
@@ -186,6 +146,7 @@ function stfq_display_assets_shortcode( $atts ) {
         ob_start();
 
         // Display assets loop
+        echo '<div class="stfq-asset-grid">'; // Open the wrapper div
         while ( $assets_query->have_posts() ) {
             $assets_query->the_post();
             
@@ -195,31 +156,29 @@ function stfq_display_assets_shortcode( $atts ) {
             ?>
             <div class="stfq-asset">
                 <div class="stfq-asset-thumbnail">
-					<div class="stfq-asset-transparency">
-						<img src="<?php echo esc_url( $thumbnail_url ); ?>" alt="<?php the_title_attribute(); ?>">
-					</div>
-				</div>
+                    <img src="<?php echo esc_url( $thumbnail_url ); ?>" alt="<?php the_title_attribute(); ?>">
+                </div>
                 <div class="stfq-asset-details">
                     <h4 class="stfq-asset-title"><?php the_title(); ?></h4>
 					<hr />
                     <div class="stfq-asset-description">
                         <?php the_content(); ?>
+						<div class="stfq-asset-file-type"><?php echo get_post_meta( get_the_ID(), 'file_type', true ); ?></div>
                     </div>
-					<div class="stfq-asset-file-type"><span style="margin-top: 10px; display: inline-block; padding: 2px; background: #ddd; border-radius: 3px; font-weight:700"><?php echo get_post_meta( get_the_ID(), 'file_type', true ); ?></span></div>
+                    <div class="stfq-asset-download-link">
+                        <?php $download_url = get_post_meta( get_the_ID(), 'download_url', true );
+                            if ( ! empty( $download_url ) ) {
+                            ?>
+                            <a href="<?php echo esc_url( $download_url ); ?>" download class="button"><i class="fas fa-download"></i> Download</a>
+                        <?php
+                        }
+                        ?>
+                    </div>
                 </div>
-				<div class="stfq-asset-download-link">
-    				<?php $download_url = get_post_meta( get_the_ID(), 'download_url', true );
-					    if ( ! empty( $download_url ) ) {
-        					?>
-        					<a href="<?php echo esc_url( $download_url ); ?>" download><i class="fas fa-download"></i> Download</a>
-        				<?php
-    				}
-    				?>
-				</div>
-
             </div>
             <?php
         }
+        echo '</div>'; // Close the wrapper div
 
         // End output buffer and store output
         $output = ob_get_clean();
@@ -239,6 +198,6 @@ add_shortcode( 'display_assets', 'stfq_display_assets_shortcode' );
 // Enqueue scripts and styles for the front end
 function stfq_enqueue_scripts_styles() {
     // Enqueue CSS stylesheet
-    wp_enqueue_style( 'stfq-asset-manager-styles', plugins_url( 'style.css', __FILE__ ), array(), '1.0' );
+    wp_enqueue_style( 'stfq-asset-manager-styles', plugins_url( 'stfq-asset-manager-styles.css', __FILE__ ), array(),);
 }
 add_action( 'wp_enqueue_scripts', 'stfq_enqueue_scripts_styles' );
