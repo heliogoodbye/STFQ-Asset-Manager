@@ -198,6 +198,6 @@ add_shortcode( 'display_assets', 'stfq_display_assets_shortcode' );
 // Enqueue scripts and styles for the front end
 function stfq_enqueue_scripts_styles() {
     // Enqueue CSS stylesheet
-    wp_enqueue_style( 'stfq-asset-manager-styles', plugins_url( 'stfq-asset-manager-styles.css', __FILE__ ), array(),);
+    wp_enqueue_style( 'stfq-asset-manager-styles', plugins_url( 'style.css', __FILE__ ), array(),);
 }
 add_action( 'wp_enqueue_scripts', 'stfq_enqueue_scripts_styles' );
