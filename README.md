@@ -1,6 +1,6 @@
 # STFQ Asset Manager
 
-![STFQ Asset Manager](https://github.com/heliogoodbye/STFQ-Asset-Manager/assets/105381685/7e3f8c2d-647e-4c4b-9955-905fdc0eca89)
+![STFQ Asset Manager](https://github.com/heliogoodbye/STFQ-Asset-Manager/assets/105381685/93b3593f-4401-43da-92f3-1bf54466b352)
 
 **STFQ Asset Manager** is designed to help WordPress users efficiently manage and distribute digital assets such as AI, EPS, and PDF documents. Let's break down its features and functionalities:
 
