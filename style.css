@@ -1,4 +1,4 @@
-/* Styles for the STFQ Asset Manager plugin */
+/* style.css */
 .stfq-asset-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -15,6 +15,7 @@
     width: 100%;
     height: auto;
     background: #ddd;
+	border-radius: 3px;
 }
 
 .stfq-asset-title {
