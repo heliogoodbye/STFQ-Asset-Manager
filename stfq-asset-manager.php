@@ -36,7 +36,7 @@ function stfq_register_post_type() {
         'taxonomies' => array( 'asset_tags' ),
         'menu_icon' => 'dashicons-images-alt2',
     );
-    register_post_type( 'stfq_asset', $args );
+    register_post_type( 'asset', $args );
 }
 add_action( 'init', 'stfq_register_post_type' );
 
@@ -47,7 +47,7 @@ function stfq_register_taxonomy() {
         'rewrite' => array( 'slug' => 'asset-tag' ),
         'hierarchical' => true,
     );
-    register_taxonomy( 'asset_tag', 'stfq_asset', $args );
+    register_taxonomy( 'asset_tag', 'asset', $args );
 }
 add_action( 'init', 'stfq_register_taxonomy' );
 
@@ -61,7 +61,7 @@ function stfq_add_custom_field_on_activation() {
     
     // Get all asset posts
     $assets_query = new WP_Query( array(
-        'post_type' => 'stfq_asset',
+        'post_type' => 'asset',
         'posts_per_page' => -1, // Retrieve all assets
     ) );
 
@@ -85,8 +85,8 @@ register_activation_hook( __FILE__, 'stfq_add_custom_field_on_activation' );
 // Add meta boxes for additional information
 function stfq_add_meta_boxes() {
     // Add the download URL meta box before the custom fields meta box
-    add_meta_box( 'download_url', 'Download URL', 'stfq_download_url_meta_box', 'stfq_asset', 'normal', 'high' );
-    add_meta_box( 'file_type', 'File Type', 'stfq_file_type_meta_box', 'stfq_asset', 'side', 'default' );
+    add_meta_box( 'download_url', 'Download URL', 'stfq_download_url_meta_box', 'asset', 'normal', 'high' );
+    add_meta_box( 'file_type', 'File Type', 'stfq_file_type_meta_box', 'asset', 'side', 'default' );
     // Add more meta boxes for additional information
 }
 add_action( 'add_meta_boxes', 'stfq_add_meta_boxes' );
@@ -159,7 +159,7 @@ function stfq_display_assets_shortcode( $atts ) {
 
     // Query digital assets based on tags, ordered alphabetically by title
     $assets_query = new WP_Query( array(
-        'post_type' => 'stfq_asset',
+        'post_type' => 'asset',
         'posts_per_page' => -1, // Retrieve all assets
         'tax_query' => array(
             array(
@@ -233,6 +233,6 @@ add_shortcode( 'display_assets', 'stfq_display_assets_shortcode' );
 // Enqueue scripts and styles for the front end
 function stfq_enqueue_scripts_styles() {
     // Enqueue CSS stylesheet
-    wp_enqueue_style( 'stfq-asset-manager-styles', plugins_url( 'style.css', __FILE__ ), array(),);
+    wp_enqueue_style( 'stfq-asset-manager-styles', plugins_url( 'stfq-asset-manager-styles.css', __FILE__ ), array(),);
 }
 add_action( 'wp_enqueue_scripts', 'stfq_enqueue_scripts_styles' );
