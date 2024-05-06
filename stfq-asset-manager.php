@@ -7,7 +7,7 @@ Version: 1.5
 Author: Strangefrequency LLC
 Author URI: https://strangefrequency.com/
 License: GPL-3.0-or-later
-License URI: https://www.gnu.org/licenses/old-licenses/gpl-3.0.html
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 */
 
 // Register custom post type
